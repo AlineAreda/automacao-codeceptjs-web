@@ -5,9 +5,12 @@ const {I, home_page, login_page} = inject()
 
 Feature('Login');
 
-Scenario('Should logged sucess', async () => {
-
+Before(() =>{
     I.amOnPage('/')
+    //executa sempre antes do cenário
+})
+
+Scenario('Should logged sucess', async () => {    
     
     home_page.loginPage()
     login_page.loggedUser('qa.areda@gmail.com','senha123')

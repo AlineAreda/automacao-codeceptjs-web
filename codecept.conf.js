@@ -29,6 +29,13 @@ exports.config = {
       }
     }
   },
+  plugins: {
+    screenshotOnFail: {
+        enabled: true
+    }      
+},
+ bootstrap: './server/server.js',
+ teardown: './server/server.js',
   include: {
     "I": "./steps_file.js",
     "home_page": "./pages/home_page.js",
