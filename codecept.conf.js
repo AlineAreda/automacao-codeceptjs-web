@@ -10,6 +10,8 @@ setHeadlessWhen(process.env.HEADLESS);
 setCommonPlugins();
 
 /** @type {CodeceptJS.MainConfig} */
+const server = require('./server/server.js')
+
 exports.config = {
   tests: './steps/*_test.js',
   output: './output',
@@ -30,12 +32,25 @@ exports.config = {
     }
   },
   plugins: {
-    screenshotOnFail: {
-        enabled: true
-    }      
-},
- bootstrap: './server/server.js',
- teardown: './server/server.js',
+    allure: {
+      enabled: true
+    },
+    stepByStepReport: {
+      enabled: true,
+      deleteSuccessful: false,
+      fullPageScreenshots: true,
+      screenshotsForAllureReport: true
+    }, screenshotOnFail: {
+      enabled: true
+    },
+
+  },
+  bootstrap: async () => {
+    await server.start();
+  },
+  teardown: async () => {
+    await server.stop();
+  },
   include: {
     "I": "./steps_file.js",
     "home_page": "./pages/home_page.js",

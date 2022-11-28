@@ -25,7 +25,4 @@ module.exports = {
   registerPage() {
     I.click(this.button.register)
   }
-
-
-
 }
